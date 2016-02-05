@@ -20,23 +20,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     private static ImageView switchImage;
     private static Button buttonUpdate;
-    private RadioButton reps;
-    private RadioButton mins;
-    private RadioButton goalBurn;
-    private RadioButton workoutBurned;
-    private EditText editText; //this is input reps/mins, attempting to change name messes everything up
     private EditText inputWeight;
     private EditText convCals;
     private RadioGroup type;
     private RadioGroup preOrPost;
     private EditText resultText;
-    //private EditText displayText;
     private EditText repsMins;
     private Button resetButton;
 
 
 
-    private int currentImageIndex;
     private int imageIndex = 0;
     int[] images = {R.drawable.push_up, R.drawable.sit_up, R.drawable.squats, R.drawable.leg_lift,
                     R.drawable.plank, R.drawable.jumping_jack, R.drawable.pull_up, R.drawable.cycling,
@@ -52,18 +45,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         type = (RadioGroup) findViewById(R.id.type);
         preOrPost = (RadioGroup) findViewById(R.id.preOrPost);
         repsMins = (EditText) findViewById(R.id.repsMins);
-        editText = (EditText) findViewById(R.id.editText);
         inputWeight = (EditText) findViewById(R.id.weight);
         convCals = (EditText) findViewById(R.id.calBurn);
         resultText = (EditText) findViewById(R.id.result);
 
-        //displayText = (EditText) findViewById(R.id.display);
 
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.exercise, android.R.layout.simple_spinner_item);
         exercise.setAdapter(adapter);
         exercise.setOnItemSelectedListener(this);
-        //spinnerPick();
         updateButtonClick();
         resetButtonClick();
     }
@@ -114,7 +104,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         TextView myText = (TextView) view;
-        //Toast.makeText(this, "You selected"+Integer.toString(position), Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "You selected "+myText.getText(), Toast.LENGTH_SHORT).show();
         imageIndex = position;
         switchImage.setImageResource(images[position]);
@@ -127,12 +116,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     public void updateButtonClick() {
 
-
-        //int preOrPostId = preOrPost.getCheckedRadioButtonId();
-        /*if (type.getCheckedRadioButtonId() != -1) {
-            typeID = type.getCheckedRadioButtonId()
-        }*/
-        //switchImage = (ImageView) findViewById(R.id.image);
         buttonUpdate = (Button) findViewById(R.id.updateButton);
 
         buttonUpdate.setOnClickListener(
@@ -151,8 +134,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                                 weight = weight / 10 * 10; //this is for rough estimate of weight, in tens
                                 factor = (weight - 150) / 10; //get the factor to add to multiplier
                                 multiplier = multiplier + (factor * constant); //get the multiplier
-
-                                Toast.makeText(MainActivity.this, "weight is " + Double.toString(weight) + " and factor is " + Double.toString(factor) + " and constant is " + Double.toString(constant), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(MainActivity.this, "Weight must be a number greater than 0", Toast.LENGTH_SHORT).show();
                                 return;
@@ -168,23 +149,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                         if (typeID == -1 || preOrPostID == -1) {
                             Toast.makeText(MainActivity.this, "Both buttons must be selected to update", Toast.LENGTH_SHORT).show();
                         } else {
-                            /*if (preOrPostButton.equals("Pre Workout")) {
-                                try {
-                                    double dub = (double) Integer.parseInt(convCals.getText().toString());
-                                    if (dub < 0) {
-                                        Toast.makeText(MainActivity.this, "cannot convert to negative calories", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    }
-                                } catch(NumberFormatException e) {
-                                    Toast.makeText(MainActivity.this, "Invalid input", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                            }*/
                             //default Reps exercise is Situp
                             //default Mins exercise is Walking
-                            int withoutWeight = 0;
-                            double reps;
-                            double mins;
                             double toUpdate = 0;
                             double defaultBurnedReps;
                             double defaultBurnedMins;
@@ -263,24 +229,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                                     toUpdate = defaultBurnedReps / .5;
                                 } else {
                                     Toast.makeText(MainActivity.this, "cannot do reps of this exercise", Toast.LENGTH_SHORT).show();
-                                    /*toUpdate = defaultBurnedReps / 10;
-                                    if (exerciseString.equals("Leg Lift")) {
-                                        toUpdate = toUpdate * 1.25;
-                                    } else if (exerciseString.equals("Plank")) {
-                                        toUpdate = toUpdate * 1.25;
-                                    } else if (exerciseString.equals("Jumping Jacks")) {
-                                        toUpdate = toUpdate * .5;
-                                    } else if (exerciseString.equals("Cycling")) {
-                                        toUpdate = toUpdate * .6;
-                                    } else if (exerciseString.equals("Walking")) {
-                                        toUpdate = toUpdate;
-                                    } else if (exerciseString.equals("Jogging")) {
-                                        toUpdate = toUpdate * .6;
-                                    } else if (exerciseString.equals("Swimming")) {
-                                        toUpdate = toUpdate * .65;
-                                    } else if (exerciseString.equals("Stair Climbing")) {
-                                        toUpdate = toUpdate * .75;
-                                    }*/
                                 }
 
                             } else if (typeButton.getText().equals("Minutes") && preOrPostButton.getText().equals("Pre Workout")) {
@@ -341,35 +289,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                                 }
                             }
                             if (preOrPostButton.getText().equals("Pre Workout")) {
-                                //update Reps/Mins needed
                                 toUpdate = toUpdate / multiplier;
                                 resultText.setText(String.valueOf((int) toUpdate) + " " + displayString);
-                                //resultText.setText(String.valueOf(toUpdate));
-                                //reset displayText
-                                //displayText.setText(displayString);
                             } else {
-                                //update convCals
-                                //working correctly
                                 toUpdate = toUpdate * multiplier;
                                 convCals.setText(String.valueOf((int) toUpdate));
-                                //displayText.setText("");
                                 resultText.setText("");
                             }
-                            Toast.makeText(MainActivity.this, "multiplier is " + (Double.toString(multiplier)), Toast.LENGTH_SHORT).show();
-                            //displayText.setText(displayString);
                         }
-
-
-
-
-
                     }
                 }
         );
     }
 
     public static boolean isValid(String s) {
-        //first check to see that it's numberic
+        //first check to see that it's numeric
         for (char c: s.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
@@ -380,10 +314,4 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
         return true;
     }
-
-    /*public void spinnerPick() {
-        //need to get the index of the correct image
-        imageIndex = 2;
-        switchImage.setImageResource(images[imageIndex]);
-    }*/
 }
