@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                                 factor = (weight - 150) / 10; //get the factor to add to multiplier
                                 multiplier = multiplier + (factor * constant); //get the multiplier
                             } else {
-                                Toast.makeText(MainActivity.this, "Weight must be a number greater than 0", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Weight must be a whole number greater than 0", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -171,12 +171,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                             //now check to see that inputs are valid
                             if (preOrPostButton.getText().equals("Pre Workout")) {
                                 if (!MainActivity.isValid(convCals.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "The input must be a number greater than 0", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "The input must be a whole number greater than 0", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             } else if (preOrPostButton.getText().equals("Post Workout")) {
                                 if (!MainActivity.isValid(repsMins.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "The input must be a number greater than 0", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "The input must be a whole number greater than 0", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             }
