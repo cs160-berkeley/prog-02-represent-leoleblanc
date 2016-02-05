@@ -32,6 +32,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private EditText resultText;
     //private EditText displayText;
     private EditText repsMins;
+    private Button resetButton;
 
 
 
@@ -55,6 +56,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         inputWeight = (EditText) findViewById(R.id.weight);
         convCals = (EditText) findViewById(R.id.calBurn);
         resultText = (EditText) findViewById(R.id.result);
+
         //displayText = (EditText) findViewById(R.id.display);
 
 
@@ -63,6 +65,28 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         exercise.setOnItemSelectedListener(this);
         //spinnerPick();
         updateButtonClick();
+        resetButtonClick();
+    }
+
+    public void resetButtonClick() {
+        resetButton = (Button) findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //clear the radioGroups
+                        type.clearCheck();
+                        preOrPost.clearCheck();
+                        //clear each text field
+                        repsMins.setText("");
+                        inputWeight.setText("");
+                        convCals.setText("");
+                        resultText.setText("");
+                        Toast.makeText(MainActivity.this, "Reset all fields", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -115,8 +139,25 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //String defaultExercise = "Situp";
                         String exerciseString = exercise.getSelectedItem().toString();
+                        double multiplier = 1;
+                        double constant = 25 / 350D;
+                        double factor = 0;
+                        //determine the multiplier
+                        if (!inputWeight.getText().toString().equals("")) {
+                            if (MainActivity.this.isValid(inputWeight.getText().toString())) {
+                                int weight = (int) Double.parseDouble(inputWeight.getText().toString());
+                                //get the weight
+                                weight = weight / 10 * 10; //this is for rough estimate of weight, in tens
+                                factor = (weight - 150) / 10; //get the factor to add to multiplier
+                                multiplier = multiplier + (factor * constant); //get the multiplier
+
+                                Toast.makeText(MainActivity.this, "weight is " + Double.toString(weight) + " and factor is " + Double.toString(factor) + " and constant is " + Double.toString(constant), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Weight must be a number greater than 0", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
                         //gives which radio button has been selected
                         int typeID = type.getCheckedRadioButtonId();
                         int preOrPostID = preOrPost.getCheckedRadioButtonId();
@@ -301,16 +342,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                             }
                             if (preOrPostButton.getText().equals("Pre Workout")) {
                                 //update Reps/Mins needed
-                                resultText.setText(String.valueOf(toUpdate) + " " + displayString);
+                                toUpdate = toUpdate / multiplier;
+                                resultText.setText(String.valueOf((int) toUpdate) + " " + displayString);
                                 //resultText.setText(String.valueOf(toUpdate));
                                 //reset displayText
                                 //displayText.setText(displayString);
                             } else {
                                 //update convCals
-                                convCals.setText(String.valueOf(toUpdate));
+                                //working correctly
+                                toUpdate = toUpdate * multiplier;
+                                convCals.setText(String.valueOf((int) toUpdate));
                                 //displayText.setText("");
                                 resultText.setText("");
                             }
+                            Toast.makeText(MainActivity.this, "multiplier is " + (Double.toString(multiplier)), Toast.LENGTH_SHORT).show();
                             //displayText.setText(displayString);
                         }
 
