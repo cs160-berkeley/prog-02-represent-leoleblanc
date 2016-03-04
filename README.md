@@ -1,21 +1,14 @@
 # PROG 02: Represent!
 
-Crunch Time: Workout Whiz
-Your mobile gym companion
-
-This application will allow you to see how many calories have been burned when
-doing a particular workout, as well as showing how much of a specified exercise
-would need to be done to burn a particular amount of calories
-
-Supports main specifications, as well as weight
+Briefly describe your app here.
 
 ## Authors
 
-Leo LeBlanc ([lleblanc@berkeley.edu](mailto:your_email@berkeley.edu))
+FirstName LastName ([your_email@berkeley.edu](mailto:your_email@berkeley.edu))
 
 ## Demo Video
 
-See [Crunch Time video] (https://youtu.be/KoeOxGJG3mI)
+See [your demo video title here] (https://link_to_your_video)
 
 ## Screenshots
 
