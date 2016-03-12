@@ -1,10 +1,10 @@
 # PROG 02: Represent!
 
-Briefly describe your app here.
+This app allows for the finding of congressional representatives given a chosen location
 
 ## Authors
 
-FirstName LastName ([your_email@berkeley.edu](mailto:your_email@berkeley.edu))
+Leo LeBlanc ([lleblanc@berkeley.edu](mailto:your_email@berkeley.edu))
 
 ## Demo Video
 
