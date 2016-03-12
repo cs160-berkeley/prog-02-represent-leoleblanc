@@ -19,5 +19,6 @@ See [PROG 2C] (https://youtu.be/Q-t9ht5xANc)
 
 ## Acknowledgments
 
+Eric Leschinski, stack overflow: dealing with networkOnMainThreadException
 * Hat tip to anyone who's code was used
 * Any other support
