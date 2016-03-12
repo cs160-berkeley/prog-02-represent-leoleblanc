@@ -26,15 +26,13 @@ public class WatchListenerService extends WearableListenerService {
         //test code
         //this has the message we sent, the "repName' from the PhoneToWatchService
         String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
-//        repName = value;
-        String toParse = value;
+        repName = value;
 
         Intent intent = new Intent(this, repList.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         //set repName
-        intent.putExtra("toParse", toParse);
-//        intent.putExtra("rep", repName);
+        intent.putExtra("rep", repName);
         Log.d("T", "about to start watch MainActivity with CAT_NAME: Fred");
         startActivity(intent);
 

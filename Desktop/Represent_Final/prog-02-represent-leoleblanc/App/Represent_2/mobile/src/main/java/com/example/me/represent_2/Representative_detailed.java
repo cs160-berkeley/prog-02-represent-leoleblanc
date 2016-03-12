@@ -13,11 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class Representative_detailed extends Activity {
+
+    //dummy name, image (passed in from earlier intent)
+    //get arguments passed in from previous intent that led to this screen
+    //Intent intent = getIntent();
 
     Bundle extras;
     ImageView repPic; //to change pic
@@ -26,19 +28,13 @@ public class Representative_detailed extends Activity {
     TextView repWebsite; //to change website
     TextView repEmail; //to change email
     TextView repTweets; //to change tweets
-
-    String party;
-    String website;
-    String email;
-    String tweets;
-    String endDate;
-    String bioguideId;
-    int pic;
+    String party = "";
+    String website = "";
+    String email = "";
+    String tweets = "";
+    int pic = 0;
     String repNameString = "";
     String zip;
-    String lat;
-    String lon;
-    String geoCodeJString;
     ListView lv;
     ArrayList<String> list = new ArrayList<>();
 
@@ -51,49 +47,24 @@ public class Representative_detailed extends Activity {
         repPic = (ImageView) findViewById(R.id.repImage);
         repName = (TextView) findViewById(R.id.repName);
         repParty = (TextView) findViewById(R.id.repParty);
-
+//        repWebsite = (TextView) findViewById(R.id.repWebsite);
+//        repEmail = (TextView) findViewById(R.id.repEmail);
+//        repTweets = (TextView) findViewById(R.id.repTweets);
         lv = (ListView) findViewById(R.id.webEmailTweets);
 
         //get the arguments
         extras = getIntent().getExtras();
         pic = extras.getInt("pic");
+        fillInfo(extras.getString("rep"), pic);
         zip = extras.getString("zip");
-        lat = extras.getString("lat");
-        lon = extras.getString("lon");
-        repNameString = extras.getString("rep");
-        party = extras.getString("party");
-        website = extras.getString("website");
-        email = extras.getString("email");
-        tweets = extras.getString("twitter");
-        endDate = extras.getString("endDate");
-        bioguideId = extras.getString("bioguideId");
-        geoCodeJString = extras.getString("geo");
+        //String name = intent.getStringExtra("rep");
+        //int image = extras.getInt("pic");
+        //repPic.setImageResource(extras.getInt("pic"));
+        //repName.setText(extras.getString("rep"));
+        //repName = extras.getString("rep");
+        //repPic = extras.getInt("pic");
+        //fillInfo(name);
 
-        fillInfo();
-    }
-
-    public void fillInfo() {
-        repName.setText(repNameString);
-        //set the image
-        String url = "https://theunitedstates.io/images/congress/450x550/" + bioguideId + ".jpg";
-        Picasso.with(this).load(url).into(repPic);
-//        repPic.setImageResource(pic);
-        repParty.setText(party);
-        list.add(website);
-        list.add(email);
-        list.add(tweets);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.web_email_tweets_model, list);
-        lv.setAdapter(adapter);
-
-        //trying to communicate with watch
-//        Intent phonetoWatchService = new Intent(this, PhoneToWatchService.class);
-////        phonetoWatchService.putExtra()
-//        phonetoWatchService.putExtra("rep", repNameString);
-////        Toast.makeText(this, repNameString, Toast.LENGTH_SHORT).show();
-//        startService(phonetoWatchService);
-        return;
-//        party =
     }
 
     public void fillInfo(String name, int image) {
@@ -152,9 +123,6 @@ public class Representative_detailed extends Activity {
     public void backButton(View view) {
         Intent goBack = new Intent(this, Representatives_list.class);
         goBack.putExtra("zip", zip);
-        goBack.putExtra("lat", lat);
-        goBack.putExtra("lon", lon);
-        goBack.putExtra("geo", geoCodeJString);
         startActivity(goBack);
     }
 
@@ -163,14 +131,6 @@ public class Representative_detailed extends Activity {
         moreInfo.putExtra("rep", repNameString); //transfer name
         moreInfo.putExtra("pic", pic); //transfer picture
         moreInfo.putExtra("party", party); //transer party
-        moreInfo.putExtra("email", email);
-        moreInfo.putExtra("twitter", tweets);
-        moreInfo.putExtra("website", website);
-        moreInfo.putExtra("zip", zip);
-        moreInfo.putExtra("lat", lat);
-        moreInfo.putExtra("lon", lon);
-        moreInfo.putExtra("endDate", endDate);
-        moreInfo.putExtra("bioguideId", bioguideId);
 
         startActivity(moreInfo);
     }

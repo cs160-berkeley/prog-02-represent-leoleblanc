@@ -40,67 +40,45 @@ public class repList extends Activity {
     String[] chosenNames;
     int[] chosenImages;
     Bundle extras;
-    String[] repNames;
 
     //repName for phone to watch, to get index
     String repName;
-    String toParse;
-
-    String state;
-    String county;
-    float obamaVotes;
-    float romneyVotes;
-    String vote;
 
     String intentName = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rep_list);
+//        final int row;
         extras = getIntent().getExtras();
-        toParse = extras.getString("toParse"); //get the string
-        Log.d("To parse", toParse);
-        String[] data = toParse.split(";"); //data successfully sent
+//        row = extras.getInt("row");
 
-        repName = data[0]; //repName in first block
+        repName = extras.getString("rep"); //get the name
+        if (repName.equals(null)) {
 
-        repNames = new String[data[1].split("_").length - 1]; //parse through this
-
-        String[] parseReps = data[1].split("_");
-
-
-        for (int i = 0; i < repNames.length; i++) { //parse through list of names
-            repNames[i] = parseReps[i+1];
         }
-
-        String[] picStrings = new String[data[2].split("_").length - 1];
-        String[] parsePicStrings = data[2].split("_"); //parse through this
-
-        for (int i = 0; i < picStrings.length; i++) {
-            picStrings[i] = parsePicStrings[i+1];
-        }
-
-        String[] actualParties = new String[data[3].split("_").length - 1];
-        String[] parseParties = data[3].split("_"); //parse through this
-
-        for (int i = 0; i < actualParties.length; i++) {
-            actualParties[i] = parseParties[i+1];
-        }
-
-        county = data[4];
-        state = data[5];
-        obamaVotes = Float.parseFloat(data[6]);
-        romneyVotes = Float.parseFloat(data[7]);
-        vote = data[8];
-        int index = java.util.Arrays.asList(repNames).indexOf(repName);
+//        if (repName.equals(null)) {
+//
+//        }
+//        Toast.makeText(this, repName, Toast.LENGTH_SHORT).show();
+        int index = java.util.Arrays.asList(dummyNames).indexOf(repName);
         final int row = index;
+//        row = index;
+//        int index = dummyNames.indexOf(repName);
+//        row = 2;
+
+//        if (extras.getInt("row") != 0) {
+//            row =
+//        } else {
+//            row = 0;
+//        }
 
 
 
         final GridViewPager pager = (GridViewPager) findViewById(R.id.GridViewPager);
-        pager.setAdapter(new myGridViewPagerAdapter(this, repNames, dummyImages, actualParties, picStrings));
+        pager.setAdapter(new myGridViewPagerAdapter(this, dummyNames, dummyImages, dummyParties));
         //initially intentName is the name of first person on the adapter
-        intentName = repNames[0];
+//        intentName = dummyNames[0];
         //this is to set the current item if row is given
         pager.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 
@@ -113,6 +91,7 @@ public class repList extends Activity {
                 pager.removeOnLayoutChangeListener(this);
             }
         });
+//        pager.setCurrentItem(200, 200);
         pager.setOnPageChangeListener(new GridViewPager.OnPageChangeListener() {
 
             @Override
@@ -122,7 +101,8 @@ public class repList extends Activity {
 
             @Override
             public void onPageSelected(int i, int i1) {
-                intentName = repNames[i];
+                intentName = dummyNames[i];
+//                String name;
             }
 
             @Override
@@ -130,18 +110,23 @@ public class repList extends Activity {
 
             }
         });
+//        pager.setCurrentItem(3, 3);
+//        pager.setCurrentItem(row, 1);
+//        GridViewPager pager = (GridViewPager) findViewById(R.id.GridViewPager);
+//        pager.setAdapter(new myGridPagerAdapter(this, getFragmentManager(), dummyNames, dummyImages));
     }
 
     public void clickVoteView(View view) {
         Intent voteView = new Intent(this, voteView.class);
+        //send stuff to phone from watch
+//        Intent watchToPhoneService = new Intent(this, WatchToPhoneService.class);
+//        watchToPhoneService.putExtra("rep", intentName);
+//        startService(watchToPhoneService);
 
         //send the name for voteView
+        Toast.makeText(this, intentName, Toast.LENGTH_SHORT).show();
+        Log.d("THIS IS THE NAME", intentName);
         voteView.putExtra("rep", intentName);
-        voteView.putExtra("county", county);
-        voteView.putExtra("state", state);
-        voteView.putExtra("obamaVotes", obamaVotes);
-        voteView.putExtra("romneyVotes", romneyVotes);
-        voteView.putExtra("vote", vote);
         startActivity(voteView);
     }
 }

@@ -19,11 +19,6 @@ public class voteView extends Activity {
     TextView obamaPercent;
     TextView romneyPercent;
     String name;
-    String county;
-    String state;
-    float obamaVotes;
-    float romneyVotes;
-    String vote;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +32,6 @@ public class voteView extends Activity {
 
         extras = getIntent().getExtras();
         name = extras.getString("rep");
-        county = extras.getString("county");
-        state = extras.getString("state");
-        obamaVotes = extras.getFloat("obamaVotes");
-        romneyVotes = extras.getFloat("romneyVotes");
-        vote = extras.getString("vote");
 
 //        name = getIntent().getExtras().getString("rep");
         fillInfo(name);
@@ -52,52 +42,52 @@ public class voteView extends Activity {
     }
 
     public void fillInfo(String name) {
-//        String vote = "";
-//        String state = "";
-//        String county = "";
-//        String obamaperc = "";
-//        String romneyperc = "";
-//        if (name.equals("Dianne Feinstein")) {
-//            vote = "Obama";
-//            state = "CA";
-//            county = "Antelope";
-//            obamaperc = "64";
-//            romneyperc = "36";
-//            //do stuff
-//        } else if (name.equals("Barbara Boxer")) {
-//            vote = "Obama";
-//            state = "CA";
-//            county = "Marin";
-//            obamaperc = "55";
-//            romneyperc = "45";
-//            //do stuff
-//        } else if (name.equals("Barbara Lee")) {
-//            vote = "Obama";
-//            state = "CA";
-//            county = "Oakland";
-//            obamaperc = "70";
-//            romneyperc = "30";
-//            //do stuff
-//        } else if (name.equals("Ami Bera")) {
-//            vote = "Obama";
-//            state = "CA";
-//            county = "Richmond";
-//            obamaperc = "80";
-//            romneyperc = "20";
-//            //do stuff
-//        } else if (name.equals("Ami Bera 2")) {
-//            vote = "Obama";
-//            state = "CA";
-//            county = "Richmond";
-//            obamaperc = "80";
-//            romneyperc = "20";
-//            //do stuff
-//        }
+        String vote = "";
+        String state = "";
+        String county = "";
+        String obamaperc = "";
+        String romneyperc = "";
+        if (name.equals("Dianne Feinstein")) {
+            vote = "Obama";
+            state = "CA";
+            county = "Antelope";
+            obamaperc = "64";
+            romneyperc = "36";
+            //do stuff
+        } else if (name.equals("Barbara Boxer")) {
+            vote = "Obama";
+            state = "CA";
+            county = "Marin";
+            obamaperc = "55";
+            romneyperc = "45";
+            //do stuff
+        } else if (name.equals("Barbara Lee")) {
+            vote = "Obama";
+            state = "CA";
+            county = "Oakland";
+            obamaperc = "70";
+            romneyperc = "30";
+            //do stuff
+        } else if (name.equals("Ami Bera")) {
+            vote = "Obama";
+            state = "CA";
+            county = "Richmond";
+            obamaperc = "80";
+            romneyperc = "20";
+            //do stuff
+        } else if (name.equals("Ami Bera 2")) {
+            vote = "Obama";
+            state = "CA";
+            county = "Richmond";
+            obamaperc = "80";
+            romneyperc = "20";
+            //do stuff
+        }
         whichVote.setText(vote);
         whichState.setText(state);
         whichCounty.setText(county);
-        obamaPercent.setText(String.valueOf(obamaVotes));
-        romneyPercent.setText(String.valueOf(romneyVotes));
+        obamaPercent.setText(obamaperc);
+        romneyPercent.setText(romneyperc);
     }
 
 }

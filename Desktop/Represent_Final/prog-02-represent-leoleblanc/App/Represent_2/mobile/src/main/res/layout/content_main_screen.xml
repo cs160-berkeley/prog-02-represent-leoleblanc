@@ -12,8 +12,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.me.represent_2.MainScreen"
     tools:showIn="@layout/main_screen"
-    android:weightSum="1"
-    android:background="@drawable/congress_50">
+    android:weightSum="1">
 
     <Button
         android:layout_width="wrap_content"
@@ -68,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Zip code"
-                        android:id="@+id/zipButton"
+                        android:id="@+id/codeButton"
                         android:checked="false" />
 
                     <EditText
