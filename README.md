@@ -8,11 +8,10 @@ Leo LeBlanc ([lleblanc@berkeley.edu](mailto:your_email@berkeley.edu))
 
 ## Demo Video
 
-See [your demo video title here] (https://link_to_your_video)
+See [PROG 2C] (https://youtu.be/Q-t9ht5xANc)
 
 ## Screenshots
-
-<img src="screenshots/main.png" height="400" alt="Screenshot"/>
+<img src="Desktop/Represent_Final/prog-02-represent-leoleblanc/screenshots/main.png" height="400" alt="Screenshot"/>
 
 ## Acknowledgments
 
